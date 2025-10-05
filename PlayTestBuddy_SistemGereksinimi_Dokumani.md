@@ -88,7 +88,7 @@ Sistem aşağıdaki ana bileşenlerden oluşur:
 |------|----|--------|-------|
 | Proje Sahibi | İsmail ARICIOĞLU | 03-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 03-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 03-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
 
