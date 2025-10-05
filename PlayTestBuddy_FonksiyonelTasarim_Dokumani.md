@@ -144,7 +144,7 @@ Sistem aşağıdaki ana modüllerden oluşur:
 |------|----|--------|-------|
 | Proje Sahibi | İsmail ARICIOĞLU | 04-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 04-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 04-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
 
