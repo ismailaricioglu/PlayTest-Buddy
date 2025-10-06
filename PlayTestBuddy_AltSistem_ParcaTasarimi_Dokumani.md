@@ -139,7 +139,7 @@ class PlayTestSDK(private val userId: String, private val appId: String, private
 |------|----|--------|-------|
 | Proje Sahibi | İsmail ARICIOĞLU | 05-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 05-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 05-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
 
