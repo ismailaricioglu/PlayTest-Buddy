@@ -85,17 +85,12 @@ Test kapsamı **V-Model doğrulama evresinin dört temel seviyesini** içerir:
 
 ---
 
-### ✅ **UT-003 – Puan Güncelleme İşlevi (Güncel)**
+### **UT-003 – Puan Güncelleme İşlevi (Güncel)**
 | Başlık | Puan ekleme ve düşürme işlemlerinin doğrulanması |
 |--------|---------------------------------------------------|
 | **Ön Koşul** | Kullanıcı sistemde kayıtlı, başlangıç puanı = 120. |
-| **Adımlar** |  
-1️⃣ `/api/points/add` çağrısı yapılır (+10 puan – test katkısı).  
-2️⃣ `/api/points/deduct` çağrısı yapılır (–120 puan – test başlatma). |
-| **Beklenen Sonuç** |  
-- İlk işlem sonrası bakiye = **130 puan**  
-- İkinci işlem sonrası bakiye = **10 puan**  
-Ayrıca `transactions` tablosuna doğru kayıt eklenmelidir. |
+| **Adımlar** | `/api/points/add` çağrısı yapılır (+10 puan – test katkısı).<br>2. `/api/points/deduct` çağrısı yapılır (–120 puan – test başlatma). |
+| **Beklenen Sonuç** | İlk işlem sonrası bakiye = **130 puan**<br>İkinci işlem sonrası bakiye = **10 puan** Ayrıca `transactions` tablosuna doğru kayıt eklenmelidir. |
 
 **Beklenen DB Kaydı:**
 ```plaintext
