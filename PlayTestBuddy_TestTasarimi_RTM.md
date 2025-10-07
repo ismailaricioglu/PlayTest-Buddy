@@ -90,7 +90,7 @@ Test kapsamı **V-Model doğrulama evresinin dört temel seviyesini** içerir:
 |--------|---------------------------------------------------|
 | **Ön Koşul** | Kullanıcı sistemde kayıtlı, başlangıç puanı = 120. |
 | **Adımlar** | `/api/points/add` çağrısı yapılır (+10 puan – test katkısı).<br>2. `/api/points/deduct` çağrısı yapılır (–120 puan – test başlatma). |
-| **Beklenen Sonuç** | İlk işlem sonrası bakiye = **130 puan**<br>İkinci işlem sonrası bakiye = **10 puan** Ayrıca `transactions` tablosuna doğru kayıt eklenmelidir. |
+| **Beklenen Sonuç** | İlk işlem sonrası bakiye = **130 puan**<br>İkinci işlem sonrası bakiye = **10 puan**<br>`transactions` tablosuna doğru kayıt eklenmelidir. |
 
 **Beklenen DB Kaydı:**
 ```plaintext
