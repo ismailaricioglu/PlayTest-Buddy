@@ -111,7 +111,7 @@ Kabul Test Raporu (ATR)
 |------|----|--------|------|
 | Proje Yöneticisi | İsmail ARICIOĞLU | 18-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 18-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 18-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
 
