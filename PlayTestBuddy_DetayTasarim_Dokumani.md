@@ -185,6 +185,6 @@ Henüz testler çalıştırılmamıştır, ancak gereksinimler ve tasarım aras�
 |------|----|--------|------|
 | Tasarımcı | İsmail ARICIOĞLU | 07-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 07-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 07-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
