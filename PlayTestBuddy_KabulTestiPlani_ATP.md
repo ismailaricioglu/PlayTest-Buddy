@@ -99,7 +99,7 @@ Kabul testleri, sistemin **tüm uçtan uca senaryolarını** kapsar:
 |------|----|--------|------|
 | Test Yöneticisi | İsmail ARICIOĞLU | 08-10-2025 | — |
 | Gözden Geçiren | ChatGPT (Yapay Asistan) | 08-10-2025 | — |
-| Onaylayan | BilKavTopluluğu | 08-10-2025 | — |
+| Onaylayan | BilKavTopluluğu |  | — |
 
 ---
 
