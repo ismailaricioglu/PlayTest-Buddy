@@ -5,6 +5,7 @@
 - İş, Sistem ve Fonksiyonel Gereksinim dokümanları
 - Test Tasarımı & RTM sistemi
 - SDK ve API modül prototipleri
+- CONTRIBUTING, LICENSE, CODE_OF_CONDUCT
 
 ### Geliştirildi
 - Katılımcı yönetimi ve puanlama sistemi
@@ -13,5 +14,4 @@
 ## [1.1.0] – Planlanıyor
 ### Eklenecek
 - CI/CD pipeline
-- CONTRIBUTING, LICENSE, CODE_OF_CONDUCT
 - Developer Guide & User Manual
