@@ -1,2 +1,2 @@
-# PlayTest-Buddy
-PlayTest Buddy, bağımsız android mobil app geliştiriciler için topluluk tabanlı bir test yönetim sistemi sunar.
+# PlayTest Buddy Project 
+Tam kapsamlı V-Model + Kod geliştirme yapısı başarıyla oluşturuldu. 
