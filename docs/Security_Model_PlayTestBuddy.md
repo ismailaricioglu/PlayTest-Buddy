@@ -1,143 +1,120 @@
-# 🛡️ Security Model – PlayTest Buddy (v1.0.0 MVP)
+# 🔐 PlayTest Buddy – Security Model (Güvenlik Modeli ve Tehdit Analizi)
 
-## 🌟 1. Amaç
-
-Bu doküman, PlayTest Buddy platformunun güvenlik modelini tanımlar.
-Amaç, **ilk sürüm (v1.0.0)** için gerekli minimum güvenlik gereksinimlerini sağlamak, kullanıcı verisini korumak ve sistem bütünlüğünü garanti altına almaktır.
-
----
-
-## ⚙️ 2. Kapsam
-
-* MVP sürümünde yer alan API, SDK ve mobil istemci
-* Kimlik doğrulama, yetkilendirme, veri koruma ve gizli anahtar yönetimi
-* CI/CD sürecinde kimlik bilgileri yönetimi
-
-> 🚫 Bu doküman saldırı tespiti, log analizi veya refresh token yönetimi gibi ileri seviye güvenlik mekanizmalarını **kapsamaz**.
-> Bu konular **Phase 2 (Hardening & Scalability)** notlarında ele alınacaktır.
+## 📘 1. Amaç
+Bu doküman, **PlayTest Buddy** sisteminin güvenlik modelini, tehdit analizini ve alınacak önlemleri tanımlar.  
+Amaç; kullanıcı verilerinin, test süreçlerinin ve puan işlemlerinin bütünlüğünü korumaktır.
 
 ---
 
-## 🧬 3. Mimari Bileşenler
-
-### 🔹 3.1 Authentication Service
-
-**Amaç:** Kullanıcıların sisteme güvenli giriş yapmasını sağlamak.
-**Yöntem:**
-
-* Kullanıcı oturumları JWT (JSON Web Token) ile yönetilir.
-* Parolalar `bcrypt` veya `SHA-256` algoritmasıyla hashlenir.
-* Token süreleri kısa tutulur (15 dakika).
-* Access token verildiğinde user ID, role ve timestamp payload içinde saklanır.
-
-**Bağımlılıklar:**
-
-* User Service
-* DB (PostgreSQL)
+## 🧩 2. Güvenlik İlkeleri
+| İlke | Açıklama |
+|------|-----------|
+| **Gizlilik (Confidentiality)** | Verilerin yalnızca yetkili kişiler tarafından erişilebilir olması. |
+| **Bütünlük (Integrity)** | Verilerin izinsiz değiştirilmemesi. |
+| **Erişilebilirlik (Availability)** | Sistemin her zaman erişilebilir olması. |
+| **Doğrulanabilirlik (Accountability)** | Her işlemin kim tarafından yapıldığının izlenebilmesi. |
+| **Savunma Derinliği (Defense in Depth)** | Güvenlik katmanlarının çoklu düzeyde uygulanması. |
 
 ---
 
-### 🔹 3.2 Authorization Gateway
+## ⚙️ 3. Sistem Bileşenleri ve Güvenlik Düzeyi
 
-**Amaç:** Tüm API çağrılarında erişim kontrolünü merkezileştirmek.
-**Yöntem:**
-
-* Public (login/register) ve Private (test, puan, rapor) endpoint’ler ayrılır.
-* Token doğrulaması middleware katmanında yapılır.
-* Yetkisiz isteklerde `HTTP 401 / 403` kodları döner.
-* Role tabanlı policy kontrolü için `accessPolicy.json` veya RBAC tablosu kullanılır.
-
----
-
-### 🔹 3.3 Role-Based Access Controller (RBAC)
-
-**Amaç:** Kullanıcı rollerine göre erişim seviyesini belirlemek.
-**Roller:**
-
-| Rol           | Yetki                            | Açıklama                                   |
-| ------------- | -------------------------------- | ------------------------------------------ |
-| `admin`       | Full Access                      | Tüm modüller üzerinde işlem yapabilir.     |
-| `contributor` | Test başlatma / uygulama yükleme | Uygulama ekleyip test süreci başlatabilir. |
-| `tester`      | Test katılımı / puan kazanma     | Teste katılabilir, puan toplayabilir.      |
-
-**Politika Yönetimi:**
-Roller merkezi bir JSON dosyası veya veritabanı üzerinden yönetilir.
-Policy güncellemeleri CI/CD pipeline’ında migrate edilir.
+| Bileşen | Kritik Seviyesi | Koruma Yöntemi |
+|----------|-----------------|----------------|
+| **API Sunucusu** | 🔥 Yüksek | JWT tabanlı erişim, SSL, rate limiting |
+| **Mobil Uygulama** | ⚡ Orta | SDK imzası, oturum anahtarı doğrulama |
+| **Veritabanı (DB)** | 🔥 Yüksek | Şifreli bağlantı, veri anonimleştirme |
+| **Puan Servisi** | ⚡ Orta | Transactional kayıt, replay attack önleme |
+| **SDK Paketleri** | 🔒 Kritik | Kod imzalama, hash doğrulama |
+| **CI/CD Pipeline** | 🔒 Kritik | Erişim anahtarı gizliliği, çevresel değişken koruması |
 
 ---
 
-### 🔹 3.4 Security Context Middleware
+## 🧠 4. Tehdit Modelleme (STRIDE Analizi)
 
-**Amaç:** Her istekte kimlik bilgilerini doğrulamak ve izlenebilirlik sağlamak.
-**Yöntem:**
-
-* Her `HTTP request` için context objesi oluşturulur.
-* İçerik: `user_id`, `session_id`, `request_time`, `ip_address`.
-* Bu bilgiler log kayıtlarına entegre edilir (Audit v2.0’da genişletilecek).
-
----
-
-### 🔹 3.5 Secret Management
-
-**Amaç:** Sistem içi hassas verilerin güvenli yönetimi.
-**Yöntem:**
-
-* `.env` dosyaları versiyon kontrolüne dahil edilmez.
-* CI/CD ortam değişkenleri GitHub Secrets veya Vault üzerinde saklanır.
-* API anahtarları sadece build time’da erişilebilir.
-* Gerektiğinde otomatik rotasyon yapılabilir (Phase 2 önerisi).
+| Kategori | Tanım | Örnek Tehdit | Önlem |
+|-----------|--------|---------------|--------|
+| **S – Spoofing** | Kimlik sahtekarlığı | Sahte tester hesabı oluşturma | OAuth + MFA zorunluluğu |
+| **T – Tampering** | Veri manipülasyonu | Puanın manuel değiştirilmesi | Hash + DB log izleme |
+| **R – Repudiation** | İşlem reddi | “Ben o testi yapmadım” iddiası | Log imzalama, UUID kayıt |
+| **I – Information Disclosure** | Bilgi sızıntısı | E-posta veya uygulama adı sızması | Maskelenmiş veriler |
+| **D – Denial of Service** | Servis kesintisi | API istek fırtınası (flood attack) | Rate limiting, cache fallback |
+| **E – Elevation of Privilege** | Yetki yükseltme | Normal kullanıcı admin gibi davranıyor | RBAC, token denetimi |
 
 ---
 
-## 🧱️ 4. Güvenlik Akışı (High-Level Flow)
+## 🔑 5. Kimlik Doğrulama & Yetkilendirme Modeli
 
-```
-[Client] → [Auth API] → [Token Issue] → [Gateway Validation] → [RBAC Check] → [Business Logic]
-```
-
-1. Kullanıcı kimlik doğrulaması yapılır.
-2. Token üretilir ve client’a iletilir.
-3. Her istek, Gateway katmanında doğrulanır.
-4. RBAC politikaları uygulanır.
-5. Yetkili kullanıcı iş mantığına erişir.
-
----
-
-## 🚀 5. Faz Planlaması
-
-| Faz                     | Bileşen                                       | Durum         | Açıklama                          |
-| ----------------------- | --------------------------------------------- | ------------- | --------------------------------- |
-| **Phase 1 (MVP)**       | Auth Service, Gateway, RBAC, Context, Secrets | ✅ Uygulanacak | Yayınlanabilir minimum yapı       |
-| **Phase 2 (Hardening)** | Refresh Token, Audit, IDS/RateLimiter         | 🕓 Planlı     | Dayanıklılık ve ölçeklenme evresi |
+- **JWT (JSON Web Token)** kullanılacaktır.  
+- Her erişim isteği `Authorization: Bearer <token>` başlığı ile doğrulanır.  
+- Token süresi 1 saat, yenileme süresi 30 gündür.  
+- Roller:
+  - `Admin`: tüm modüller
+  - `Developer`: uygulama ekleme / puan kullanma
+  - `Tester`: test katılımı ve raporlama
+- Her endpoint, role-based erişim kontrolü (RBAC) ile sınırlandırılır.
 
 ---
 
-## 🔒 6. Güvenlik Gereksinimleri (Özet)
+## 🧮 6. Puan Servisi Güvenliği
 
-| ID     | Gereksinim                                              | Türü        | Öncelik |
-| ------ | ------------------------------------------------------- | ----------- | ------- |
-| SEC-01 | JWT ile kimlik doğrulama sağlanmalı                     | Fonksiyonel | Yüksek  |
-| SEC-02 | Token süresi 15 dakikayı geçmemeli                      | Fonksiyonel | Yüksek  |
-| SEC-03 | RBAC yapısı tüm API çağrılarını kontrol etmeli          | Fonksiyonel | Yüksek  |
-| SEC-04 | API anahtarları maskelenmeli ve .env dışına çıkarılmalı | Güvenlik    | Yüksek  |
-| SEC-05 | Loglarda hassas veri (token, parola) yer almamalı       | Güvenlik    | Orta    |
+| Risk | Önlem |
+|------|--------|
+| Puan manipülasyonu | Tüm işlem veritabanında transaction olarak tutulur. |
+| Tekrarlanan çağrılar (replay attack) | Her işlem benzersiz `transaction_id` içerir. |
+| Yetkisiz puan düşümü | Sadece oturum token sahibi işlem yapabilir. |
 
 ---
 
-## 📦 7. Dokümentasyon İlişkileri
+## 🧰 7. API Güvenliği
 
-| Doküman                           | Amaç                                |
-| --------------------------------- | ----------------------------------- |
-| `System_Requirements.md`          | Genel sistem bileşenleriyle uyum    |
-| `Functional_Design.md`            | API endpoint ve servis ilişkisi     |
-| `CI_CD_Pipeline_PlayTestBuddy.md` | Güvenli build ve deploy süreci      |
-| `Release_Plan_PlayTestBuddy.md`   | Sürüm bazlı güvenlik faz planlaması |
+| Katman | Önlem |
+|---------|--------|
+| **Ağ Katmanı** | HTTPS + HSTS zorunlu, SSL pinning |
+| **İstemci Katmanı** | API anahtarları gizlenmiş (obfuscation) |
+| **Sunucu Katmanı** | Rate limiting (60 req/dk), CORS kontrolü |
+| **Veri Katmanı** | AES-256 ile hassas veri şifreleme |
 
 ---
 
-## 🧭 8. Sonuç
+## 🧩 8. Veri Koruma & Gizlilik
 
-Bu model, PlayTest Buddy’nin ilk sürümünde **gereken güvenlik temellerini** tanımlar.
-Bu temeller, CI/CD pipeline’a entegre edilerek sürümden sürüme **güvenli sürdürülebilirlik** sağlar.
+- Kullanıcı verileri yalnızca test süreciyle ilgili olarak işlenir.  
+- Kişisel veriler (isim, e-posta) **hash veya masked** biçimde tutulur.  
+- 90 gün boyunca aktif olmayan hesaplar otomatik olarak anonimleştirilir.  
+- GDPR ve KVKK uyum kontrolü yapılır.  
 
-> “Güvenlik bir katman değil, bir kültürdür.” — Çet 🧠f
+---
+
+## 🧱 9. İzleme ve Olay Müdahalesi
+
+| Olay | Tepki | Sorumlu |
+|-------|--------|----------|
+| Şüpheli giriş (IP değişikliği) | E-posta bildirimi | Güvenlik Ekibi |
+| API aşırı istek | Otomatik IP engelleme | DevOps |
+| DB erişim hatası | Snapshot + geri yükleme | DB Admin |
+| SDK sahteciliği | Hash doğrulama ve raporlama | QA |
+
+---
+
+## 🧮 10. Güvenlik Test Planı
+
+| Test ID | Hedef | Yöntem | Sıklık |
+|----------|--------|--------|--------|
+| **SEC-001** | API erişim doğrulama | Penetrasyon testi | Aylık |
+| **SEC-002** | JWT manipülasyonu | Token injection test | 3 ayda bir |
+| **SEC-003** | Puan verisi bütünlüğü | Transaction replay testi | Her sürüm sonrası |
+| **SEC-004** | SDK kod güvenliği | Hash mismatch kontrolü | Her build sonrası |
+
+---
+
+## 🔐 11. Sonuç ve Değerlendirme
+PlayTest Buddy platformu; savunma derinliği, kimlik doğrulama, veri bütünlüğü ve güvenli işlem tasarımı ilkeleriyle korunmaktadır.  
+Sistem, gelecekte üçüncü taraf penetrasyon testlerine açık olacak şekilde tasarlanmıştır.
+
+---
+
+Hazırlayan: **İsmail ARICIOĞLU**  
+Danışman: **Çet – Yapay Asistan**
+
+> “Güvenlik, sistemin görünmeyen mimarisidir.” 🔒
