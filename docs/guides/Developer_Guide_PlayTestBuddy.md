@@ -1,172 +1,196 @@
-# 🧑‍💻 PlayTest Buddy – Developer Guide (Geliştirici Rehberi)
+# 🚀 PlayTest Buddy – Deployment & Environment Guide (Dağıtım ve Ortam Rehberi)
 
-## 📘 Amaç
-Bu doküman, PlayTest Buddy projesine katkıda bulunacak geliştiriciler için çalışma ortamı, bağımlılıklar, API yapılandırması ve test süreçlerini tanımlar.
-
----
-
-## 🧩 Genel Mimari Bileşenler
-
-| Katman | Teknoloji | Açıklama |
-|--------|------------|----------|
-| Mobil Arayüz | Flutter | Test paylaşımı, katılım ve raporlama ekranları |
-| SDK Modülü | Kotlin | Tester kimliği doğrulama bileşeni |
-| Backend Servisi | Python (Flask) | API ve puan yönetimi servisi |
-| Veritabanı | PostgreSQL | Test, kullanıcı ve puan verileri |
-| CI/CD | GitHub Actions | Otomatik test ve dağıtım hattı |
+## 📘 1. Amaç
+Bu doküman, **PlayTest Buddy** sisteminin geliştirme, test ve üretim ortamlarında nasıl dağıtılacağını açıklar.  
+Amaç, projenin tüm bileşenlerini (API, SDK, mobil uygulama) kararlı, güvenli ve tekrarlanabilir biçimde kurabilmektir.
 
 ---
 
-## ⚙️ Ortam Kurulumu
+## 🧩 2. Sistem Bileşenleri
 
-### 1️⃣ Gereksinimler
-
-| Bileşen | Minimum Sürüm |
-|----------|----------------|
-| Python | 3.10+ |
-| Flutter SDK | 3.19+ |
-| PostgreSQL | 15+ |
-| Node.js (opsiyonel) | 20+ |
-| Git | 2.40+ |
+| Bileşen | Açıklama | Sorumlu |
+|----------|-----------|----------|
+| **API Sunucusu** | Flask tabanlı RESTful servis (Python 3.10+) | Backend Dev |
+| **Veritabanı (DB)** | PostgreSQL 15+ | DB Admin |
+| **Mobil Uygulama** | Flutter tabanlı Android App | App Developer |
+| **SDK (Android)** | Kotlin tabanlı doğrulama modülü | SDK Maintainer |
+| **CI/CD Pipeline** | GitHub Actions | DevOps Engineer |
 
 ---
 
-### 2️⃣ Proje Kopyalama
+## ⚙️ 3. Donanım Gereksinimleri
 
+| Ortam | CPU | RAM | Depolama | Not |
+|--------|-----|-----|-----------|-----|
+| **Development** | 2 Core | 4 GB | 10 GB | Lokal veya Docker |
+| **Testing** | 4 Core | 8 GB | 20 GB | Staging sunucusu |
+| **Production** | 8 Core | 16 GB | 50 GB SSD | HTTPS zorunlu |
+
+---
+
+## 🌍 4. Yazılım Gereksinimleri
+
+| Yazılım | Minimum Sürüm | Not |
+|----------|----------------|-----|
+| Python | 3.10 | API backend |
+| PostgreSQL | 15 | Veritabanı |
+| Flutter SDK | 3.16 | Mobil uygulama |
+| Kotlin | 1.9 | SDK geliştirme |
+| Node.js | 18 | Dokümantasyon scriptleri |
+| Docker | 24.0+ | Konteyner yönetimi |
+| Git | 2.34+ | Versiyon kontrol |
+
+---
+
+## 🧰 5. Ortam Yapılandırması
+
+### 🧩 5.1. Dizim Yapısı
+```
+PlayTestBuddy/
+├── src/
+│   ├── api/
+│   ├── sdk/
+│   └── app/
+├── tests/
+├── docs/
+│   ├── guides/
+│   └── security/
+├── .env.example
+├── docker-compose.yml
+└── requirements.txt
+```
+
+### 🧩 5.2. Ortam Değişkenleri (`.env`)
 ```bash
-git clone https://github.com/BilKavTopluluk/PlayTestBuddy.git
-cd PlayTestBuddy
+# Genel
+APP_ENV=production
+APP_DEBUG=false
+APP_PORT=8080
+
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=playtest_admin
+DB_PASS=securepassword
+DB_NAME=playtestdb
+
+# Güvenlik
+JWT_SECRET_KEY=supersecuretokenkey
+TOKEN_EXPIRY_HOURS=1
+
+# E-posta
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=admin@bilkav.org
+SMTP_PASS=app_password
+```
+
+### 🧩 5.3. Örnek Docker Compose
+```yaml
+version: '3.9'
+
+services:
+  api:
+    build: ./src/api
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: playtestdb
+      POSTGRES_USER: playtest_admin
+      POSTGRES_PASSWORD: securepassword
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    restart: always
 ```
 
 ---
 
-### 3️⃣ Backend Kurulumu (Flask)
+## 🔄 6. CI/CD Pipeline (GitHub Actions)
 
-```bash
-cd src/backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-flask run
-```
+### `.github/workflows/deploy.yml`
+```yaml
+name: Deploy to Production
 
-📂 **Yapı:**
-```
-src/backend/
-├── app.py
-├── routes/
-│   ├── points.py
-│   ├── tests.py
-│   └── users.py
-├── models/
-│   └── db_model.py
-└── config.py
-```
+on:
+  push:
+    branches: [ main ]
 
-🧩 **API örnek çağrısı:**
-```bash
-POST /api/points/deduct
-{
-  "user_id": "dev_12345",
-  "points": 120
-}
-```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-✅ **Beklenen cevap:**
-```json
-{
-  "success": true,
-  "balance": 0
-}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest --maxfail=1 --disable-warnings -q
+
+      - name: Deploy
+        run: |
+          echo "Deploying PlayTest Buddy to Production..."
 ```
 
 ---
 
-### 4️⃣ Mobil Uygulama Kurulumu (Flutter)
+## 🧩 7. Ortamlar Arası Farklar
 
-```bash
-cd src/mobile_app
-flutter pub get
-flutter run
-```
-
-📂 **Yapı:**
-```
-src/mobile_app/
-├── lib/
-│   ├── main.dart
-│   ├── screens/
-│   │   ├── home_screen.dart
-│   │   ├── share_test_screen.dart
-│   │   └── points_screen.dart
-│   └── services/
-│       └── api_service.dart
-└── pubspec.yaml
-```
-
-🧩 **API örnek entegrasyonu:**
-```dart
-final response = await http.post(
-  Uri.parse('https://api.playtestbuddy.org/api/points/deduct'),
-  headers: {'Content-Type': 'application/json'},
-  body: jsonEncode({'user_id': 'dev_12345', 'points': 120}),
-);
-```
+| Özellik | Development | Testing (Staging) | Production |
+|----------|--------------|------------------|-------------|
+| Debug Modu | ✅ Açık | ⚠️ Kısıtlı | 🚫 Kapalı |
+| Log Seviyesi | DEBUG | INFO | ERROR |
+| DB Bağlantısı | Lokal | Cloud (RDS) | Cloud (RDS) |
+| API Erişimi | Localhost | VPN / Test URL | SSL (443) |
+| Puan Servisi | Mock | Gerçek | Gerçek |
 
 ---
 
-## 🧪 Test & Doğrulama
-
-### Backend Testleri
-```bash
-pytest tests/
-```
-📂 `tests/` dizininde tüm API endpoint testleri yer alır.
-
-### Flutter Testleri
-```bash
-flutter test
-```
-📂 `test/` klasöründe widget ve entegrasyon testleri bulunur.
+## 🔐 8. Güvenli Dağıtım Kuralları
+- Dağıtım yalnızca CI/CD pipeline üzerinden yapılır.  
+- Her build imzalanır (`SHA256 checksum`).  
+- API anahtarları `.env` dışında tutulmaz.  
+- Her ortamın kendi **secret store’u** (ör. GitHub Secrets, Vault) olmalıdır.  
+- Veri geçişlerinde yalnızca **TLS 1.3** kullanılmalıdır.  
 
 ---
 
-## 🧰 Geliştirme Süreci (Branch & Merge Modeli)
+## 🧾 9. Doğrulama Kontrol Listesi
 
-| Aşama | Branch | Açıklama |
-|--------|---------|----------|
-| Yeni özellik | `feature/...` | Yeni işlevler eklenir |
-| Hata düzeltme | `fix/...` | Mevcut hatalar giderilir |
-| Dokümantasyon | `doc/...` | Döküman güncellemeleri |
-| Yayın | `release/...` | Sürüm hazırlığı |
-| Ana dal | `main` | Kararlı sürüm kodu |
-
-Pull Request’ler **otomatik testten geçmeden** `main` dalına alınmaz.  
-Tüm PR’ler GitHub Actions pipeline tarafından test edilir ✅
+| Kontrol | Açıklama | Durum |
+|----------|-----------|--------|
+| 🧱 DB Bağlantısı | PostgreSQL erişimi test edildi | ☐ |
+| 🔐 API Token | JWT oluşturma doğrulandı | ☐ |
+| 🚀 Build & Deploy | CI/CD çalışıyor | ☐ |
+| 📊 Log İzleme | Log’lar Elastic üzerinde görülebiliyor | ☐ |
+| 🔄 Rollback | Eski sürüm geri alınabiliyor | ☐ |
 
 ---
 
-## 🧠 Geliştirici İpuçları
-
-- Her fonksiyonun üstünde **docstring** bulunmalı  
-- API endpoint’leri için **Swagger/OpenAPI** kullanımı önerilir  
-- SDK entegrasyonu ayrı bir repo olarak geliştirilebilir (örnek: `playtestbuddy-sdk-kotlin`)  
-- CI testleri localde şu komutla çalıştırılabilir:
-  ```bash
-  pytest && flutter test
-  ```
-
----
-
-## 📬 İletişim & Destek
-
-- **Topluluk:** [GitHub Discussions](https://github.com/BilKavTopluluk/PlayTestBuddy/discussions)  
-- **E-posta:** dev@bilkav.org  
-- **Güvenlik Bildirimi:** security@bilkav.org  
+## 🧠 10. Sonuç
+Bu dağıtım rehberi, PlayTest Buddy projesinin sürdürülebilir, güvenli ve ölçeklenebilir biçimde işletilmesini sağlar.  
+Tüm ortamlar tutarlı yapılandırılmış, CI/CD entegrasyonu ile otomasyon sağlanmıştır.
 
 ---
 
 Hazırlayan: **İsmail ARICIOĞLU**  
-Teknik Danışman: **Çet – Yapay Asistan**  
+Danışman: **Çet – Yapay Asistan**
 
-> “Kod, sadece bir araçtır. Dayanışma, asıl gücümüzdür.” 💪  
+> “Dağıtım bir son değil, her gün tekrarlanan bir disiplindir.” ⚙️
