@@ -1,0 +1,62 @@
+name: 🐛 Hata Bildirimi
+description: Uygulamada bir hata veya beklenmeyen davranış mı gördün? Lütfen detayları paylaş.
+title: "[BUG] <kısa açıklama>"
+labels: ["bug", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Hata Bildirimi Formu
+        Lütfen aşağıdaki bilgileri eksiksiz doldur. Bu, hatayı hızlıca çözmemizi sağlar.
+  - type: input
+    id: summary
+    attributes:
+      label: 🧾 Özet
+      description: Hatanın kısa bir tanımını gir.
+      placeholder: Örneğin: “Puanlama ekranında puan 120 yerine 0 görünüyor.”
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔍 Tekrarlama Adımları
+      description: Hatayı yeniden oluşturmak için gerekli adımları sırayla yaz.
+      placeholder: |
+        1. Giriş yap
+        2. “Puanlama” sekmesine git
+        3. “Test başlat” butonuna tıkla
+        4. Hata oluştu
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Beklenen Davranış
+      description: Normalde ne olması gerekiyordu?
+      placeholder: “Puanın 120 olarak görünmesi gerekiyordu.”
+  - type: textarea
+    id: actual
+    attributes:
+      label: 🚫 Gerçekleşen Davranış
+      description: Aslında ne oldu?
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🔥 Önem Seviyesi
+      options:
+        - Düşük
+        - Orta
+        - Yüksek
+        - Kritik
+  - type: input
+    id: environment
+    attributes:
+      label: 💻 Ortam Bilgisi
+      description: Uygulama sürümü, işletim sistemi ve cihaz bilgilerini yaz.
+      placeholder: “Android 14 / Samsung Galaxy S22 / v1.0.0”
+  - type: textarea
+    id: extra
+    attributes:
+      label: 📎 Ek Bilgi
+      description: Ekran görüntüsü, log veya açıklayıcı not ekleyebilirsin.
