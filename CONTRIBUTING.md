@@ -1,34 +1,103 @@
-# 🤝 PlayTest Buddy Katkı Rehberi
+# PlayTest Buddy – Katkı Rehberi (Contributing Guide)
 
-PlayTest Buddy açık kaynak bir projedir. Katkılarınız bu topluluğun büyümesini sağlar 💪  
+Bu belge, **Bilgisayar Kavramları Topluluğu (BilKav)** üyeleri ve topluluğa dışarıdan katkı yapmak isteyen geliştiriciler için hazırlanmıştır.
+Amaç; projeye yapılan katkıların tutarlı, kaliteli ve sürdürülebilir bir şekilde ilerlemesini sağlamaktır.
 
-## 🔧 Nasıl Katkı Sağlanır?
-1. **Fork** oluşturun (`Fork this repository`)
-2. **Yeni branch** açın:  
+---
+
+## 💡 Katkı Türleri
+
+Projeye şu şekillerde katkı yapabilirsiniz:
+
+* 🧱 **Kod geliştirme**: Yeni özellik ekleme, hata düzeltme, performans iyileştirmesi.
+* 🤪 **Test katkısı**: Test senaryoları oluşturma veya mevcut testleri genişletme.
+* 📘 **Dokümentasyon**: Rehberleri güncelleme, örnekler ekleme.
+* 💬 **Geri bildirim**: Öneri, hata bildirimi veya geliştirme fikri sunma.
+
+---
+
+## 🔧 Geliştirme Ortamı Kurulumu
+
+### 1. Depoyu Forkla ve Klonla
+
+```bash
+git fork https://github.com/bilkav/PlayTestBuddy.git
+git clone https://github.com/<kullanıcı-adın>/PlayTestBuddy.git
+cd PlayTestBuddy
+```
+
+### 2. Geliştirme Dalı (Branch) Aç
+
+```bash
+git checkout -b feature/yeni-ozellik
+```
+
+### 3. Gereksinimleri Kur
+
+```bash
+# Python (Receiver API)
+pip install -r requirements.txt
+
+# Android SDK (Kotlin Modülü)
+# Android Studio ile aç ve Gradle senkronizasyonunu tamamla
+```
+
+### 4. Testleri Çalıştır
+
+```bash
+pytest tests/
+```
+
+---
+
+## 🧩 Kodlama Kuralları
+
+* Python tarafında **PEP8** standartlarına uyun.
+* Commit mesajlarını kısa ve açıklayıcı tutun:
+
+  * ✅ `feat:` yeni özellik
+  * 🐛 `fix:` hata düzeltmesi
+  * 🧹 `refactor:` kod düzenleme
+  * 🤪 `test:` test ekleme
+* Yeni modül ekliyorsanız, ilgili `.md` dokümanını da güncelleyin (örneğin `Functional_Design.md`).
+
+---
+
+## 🔄 Katkı Gönderme (Pull Request)
+
+1. Kodunuzu tamamlayın, testlerin geçtiğinden emin olun.
+
+2. Değişikliklerinizi commit edin ve GitHub’a gönderin:
+
    ```bash
-   git checkout -b feature/yeni-ozellik
+   git push origin feature/yeni-ozellik
    ```
-3. **Değişiklikleri yapın**
-4. **Testleri çalıştırın**  
-   ```bash
-   pytest tests/
-   flutter test
-   ```
-5. **Pull Request (PR)** gönderin
 
-## 📋 Kodlama Kuralları
-- Kodlar açıklamalı (comment) olmalıdır  
-- Branch isimlendirmesi: `feature/`, `fix/`, `doc/`
-- PR açıklamaları net ve kısa tutulmalıdır
-- Tüm testler geçmeden merge yapılmaz
+3. GitHub üzerinden **Pull Request (PR)** açın.
+   PR açıklamasında:
 
-## 🧪 Test Standartları
-| Teknoloji | Test Aracı | Komut |
-|------------|-------------|--------|
-| Backend (Flask) | Pytest | `pytest tests/` |
-| Mobil (Flutter) | flutter_test | `flutter test` |
-| SDK (Kotlin) | JUnit | Android Studio test |
+   * Yaptığınız değişiklikleri özetleyin
+   * İlgili issue varsa belirtin (`Fixes #12` gibi)
+   * Test kapsamını kısaca açıklayın
 
-## 📬 İletişim
-Topluluk tartışmaları ve destek:  
-[BilKavTopluluk – Discussions](https://github.com/BilKavTopluluk/PlayTestBuddy/discussions)
+4. İnceleme (review) sürecinde gelen geri bildirimleri uygulayın.
+
+---
+
+## ✅ Katkı Onay Süreci
+
+* En az bir proje yöneticisi (BilKav Core Team üyesi) tarafından onaylanmalıdır.
+* Kod, test ve dokümentasyon incelemesinden geçer.
+* CI/CD pipeline’da tüm testlerin başarılı olması gerekir.
+
+---
+
+## ⚙️ İletişim & Destek
+
+* GitHub **Discussions** sekmesinden toplulukla iletişime geçebilirsin.
+* E-posta: **[bilkav.community@gmail.com](mailto:bilkav.community@gmail.com)**
+
+---
+
+**Teşekkürler 💙**
+PlayTest Buddy’ye katkı sağladığın için BilKav Topluluğu seni takdir ediyor!
