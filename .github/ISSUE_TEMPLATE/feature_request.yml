@@ -1,0 +1,41 @@
+name: 💡 Özellik / Geliştirme Önerisi
+description: Yeni bir fikir, geliştirme veya iyileştirme mi önermek istiyorsun?
+title: "[FEATURE] <kısa açıklama>"
+labels: ["enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Özellik Önerisi Formu
+        Yeni bir özellik fikrini veya geliştirme önerini bizimle paylaş.
+  - type: input
+    id: summary
+    attributes:
+      label: 🧾 Özet
+      description: Önerini birkaç kelimeyle açıkla.
+      placeholder: “Tester puanlarının haftalık sıralamada gösterilmesi”
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🤔 Hangi Sorunu Çözmeyi Amaçlıyor?
+      description: Bu öneri hangi problemi veya eksikliği hedefliyor?
+      placeholder: “Tester motivasyonunu artırmak için sıralama sistemi eklenmeli.”
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Önerilen Çözüm
+      description: Bu özelliğin nasıl çalışmasını öneriyorsun?
+      placeholder: “Puan tablosu haftalık olarak yenilenir ve en çok test yapan kullanıcılar listelenir.”
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatifler
+      description: Başka çözüm önerin var mı?
+  - type: textarea
+    id: extra
+    attributes:
+      label: 📎 Ek Bilgi
+      description: Görseller, diyagramlar veya referans bağlantılar ekleyebilirsin.
