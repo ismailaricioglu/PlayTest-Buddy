@@ -1,0 +1,1706 @@
+
+<!doctype html>
+<html lang="tr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mobil uygulama test süreçlerini kolaylaştıran topluluk destekli platform.">
+      
+      
+      
+        <link rel="canonical" href="https://<your-username>.github.io/PlayTestBuddy/05_DetayTasarim/PlayTestBuddy_DetayTasarim_Dokumani/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>🧩 PlayTest Buddy – Detay Tasarım Dokümanı (DDD) - PlayTest Buddy Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#playtest-buddy-detay-tasarm-dokuman-ddd" class="md-skip">
+          Ana içeriğe geç
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Başlık">
+    <a href="../.." title="PlayTest Buddy Documentation" class="md-header__button md-logo" aria-label="PlayTest Buddy Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PlayTest Buddy Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🧩 PlayTest Buddy – Detay Tasarım Dokümanı (DDD)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Ara" placeholder="Ara" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Ara">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Temizle" aria-label="Temizle" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Arama başlatılıyor
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/<your-username>/PlayTestBuddy" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PlayTestBuddy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Sekmeler" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Anasayfa
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs/System_Requirements.md" class="md-tabs__link">
+          
+  
+  
+  Gereksinimler
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs/Functional_Design.md" class="md-tabs__link">
+          
+  
+  
+  Tasarım
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs/Test_Design_RTM.md" class="md-tabs__link">
+          
+  
+  
+  Test Dokümantasyonu
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs/guides/Developer_Guide_PlayTestBuddy.md" class="md-tabs__link">
+          
+  
+  
+  Rehberler
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CONTRIBUTING.md" class="md-tabs__link">
+          
+  
+  
+  Topluluk
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigasyon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PlayTest Buddy Documentation" class="md-nav__button md-logo" aria-label="PlayTest Buddy Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    PlayTest Buddy Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/<your-username>/PlayTestBuddy" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PlayTestBuddy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anasayfa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gereksinimler
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Gereksinimler
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/System_Requirements.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    İş Gereksinimi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/System_Requirements.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sistem Gereksinimi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tasarım
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tasarım
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/Functional_Design.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fonksiyonel Tasarım
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/SubSystem_Design.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alt Sistem Tasarımı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/Detailed_Design.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Detay Tasarım
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Test Dokümantasyonu
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Test Dokümantasyonu
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/Test_Design_RTM.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Test Tasarımı ve RTM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/Acceptance_Test_Plan.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kabul Test Planı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/Acceptance_Test_Report.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kabul Test Raporu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Rehberler
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Rehberler
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/guides/Developer_Guide_PlayTestBuddy.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geliştirici Rehberi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/guides/User_Guide_PlayTestBuddy.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kullanıcı Rehberi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/guides/Admin_Guide_PlayTestBuddy.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Yönetici Rehberi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Topluluk
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Topluluk
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Katkı Rehberi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/guides/Community_Guide_PlayTestBuddy.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Topluluk Rehberi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lisans
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-amac" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 🎯 Amaç
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-referanslar" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 📚 Referanslar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-genel-mimari-ozeti" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 🧠 Genel Mimari Özeti
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-bilesen-diyagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 🧱 Bileşen Diyagramı
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-veri-modeli" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 🧩 Veri Modeli
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 🧩 Veri Modeli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-tablolar" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Tablolar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Tablolar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointstransactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      PointsTransactions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-api-tasarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. ⚙️ API Tasarımı
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ⚙️ API Tasarımı">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-pointsservice-revize" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 PointsService (Revize)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-sdkverifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 SDKVerifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-testorchestrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 TestOrchestrator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-algoritma-taslaklar" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 🧮 Algoritma Taslakları
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 🧮 Algoritma Taslakları">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-puan-guncelleme-debitcredit" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Puan Güncelleme (Debit/Credit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-test-katlm-yonetimi" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Test Katılım Yönetimi
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-guvenlik-ozeti" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 🔒 Güvenlik Özeti
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tasarm-dogrulama-ve-eslestirme-tablosu" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 🔍 Tasarım Doğrulama ve Eşleştirme Tablosu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-onay" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 🧾 Onay
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="playtest-buddy-detay-tasarm-dokuman-ddd">🧩 PlayTest Buddy – Detay Tasarım Dokümanı (DDD)<a class="headerlink" href="#playtest-buddy-detay-tasarm-dokuman-ddd" title="Permanent link">&para;</a></h1>
+<p><strong>Hazırlayan:</strong> İsmail ARICIOĞLU – BilKavTopluluk Üyesi<br />
+<strong>Gözden Geçiren:</strong> ChatGPT (Yapay Asistan)<br />
+<strong>Model:</strong> V-Model – Detay Tasarım Aşaması<br />
+<strong>Tarih:</strong> 07-10-2025<br />
+<strong>Durum:</strong> Onaylı  </p>
+<hr />
+<h2 id="1-amac">1. 🎯 Amaç<a class="headerlink" href="#1-amac" title="Permanent link">&para;</a></h2>
+<p>Bu doküman, <em>PlayTest Buddy</em> uygulamasının düşük seviye (detailed) tasarımını açıklamaktadır.<br />
+Amaç, sistemin modüllerinin, veri akışlarının ve arayüzlerinin teknik detaylarını netleştirerek geliştirme aşamasına sağlam bir temel oluşturmaktır.</p>
+<hr />
+<h2 id="2-referanslar">2. 📚 Referanslar<a class="headerlink" href="#2-referanslar" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Doküman</th>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>İş Gereksinimi</td>
+<td>BRD</td>
+<td>İş hedefleri</td>
+</tr>
+<tr>
+<td>Sistem Gereksinimi</td>
+<td>SRD</td>
+<td>Sistem fonksiyonları</td>
+</tr>
+<tr>
+<td>Fonksiyonel Tasarım</td>
+<td>FDD</td>
+<td>Modül işlevleri</td>
+</tr>
+<tr>
+<td>Alt Sistem / Parça Tasarımı</td>
+<td>LLD</td>
+<td>Modül yapısı ve API tanımı</td>
+</tr>
+<tr>
+<td>Test Tasarımı &amp; RTM</td>
+<td>TTD</td>
+<td>Gereksinim-test izlenebilirliği</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-genel-mimari-ozeti">3. 🧠 Genel Mimari Özeti<a class="headerlink" href="#3-genel-mimari-ozeti" title="Permanent link">&para;</a></h2>
+<p><strong>Mimari Model:</strong> Katmanlı (Layered Architecture)<br />
+- <strong>Presentation Layer (Flutter)</strong> – kullanıcı arayüzü ve SDK işlemleri<br />
+- <strong>Application Layer (Flask API)</strong> – iş akış kontrolü, puanlama ve doğrulama servisleri<br />
+- <strong>Data Layer (PostgreSQL)</strong> – kullanıcı, test ve puan tabloları  </p>
+<div class="codehilite"><pre><span></span><code>[Flutter UI] → [Flask REST API] → [PostgreSQL]
+</code></pre></div>
+
+<hr />
+<h2 id="4-bilesen-diyagram">4. 🧱 Bileşen Diyagramı<a class="headerlink" href="#4-bilesen-diyagram" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Katman</th>
+<th>Modül</th>
+<th>Sorumluluk</th>
+<th>Girdi</th>
+<th>Çıktı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI</td>
+<td>TestDashboard</td>
+<td>Test süreçlerini görüntüleme</td>
+<td>Kullanıcı kimliği</td>
+<td>Test listesi</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>WalletScreen</td>
+<td>Puan bilgilerini gösterme</td>
+<td>Kullanıcı ID</td>
+<td>Güncel puan</td>
+</tr>
+<tr>
+<td>API</td>
+<td>PointsService</td>
+<td>Puan kazandırma / düşürme işlemleri</td>
+<td>user_id, action</td>
+<td>Güncel puan</td>
+</tr>
+<tr>
+<td>API</td>
+<td>SDKVerifier</td>
+<td>Katılımcı doğrulama işlemi</td>
+<td>sdk_token</td>
+<td>verified flag</td>
+</tr>
+<tr>
+<td>API</td>
+<td>TestOrchestrator</td>
+<td>Test sürecini yönetme</td>
+<td>app_id, participants</td>
+<td>test_state</td>
+</tr>
+<tr>
+<td>DB</td>
+<td>Users</td>
+<td>Kullanıcı bilgileri</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>DB</td>
+<td>Points</td>
+<td>Puan işlemleri</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>DB</td>
+<td>Tests</td>
+<td>Test süreçleri</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-veri-modeli">5. 🧩 Veri Modeli<a class="headerlink" href="#5-veri-modeli" title="Permanent link">&para;</a></h2>
+<h3 id="51-tablolar">5.1 Tablolar<a class="headerlink" href="#51-tablolar" title="Permanent link">&para;</a></h3>
+<h4 id="users"><strong>Users</strong><a class="headerlink" href="#users" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Alan</th>
+<th>Tür</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>Kullanıcı kimliği</td>
+</tr>
+<tr>
+<td>email</td>
+<td>VARCHAR(100)</td>
+<td>Giriş e-postası</td>
+</tr>
+<tr>
+<td>password_hash</td>
+<td>VARCHAR(255)</td>
+<td>Şifrelenmiş parola</td>
+</tr>
+<tr>
+<td>points</td>
+<td>INT</td>
+<td>Mevcut puan</td>
+</tr>
+<tr>
+<td>join_date</td>
+<td>TIMESTAMP</td>
+<td>Kayıt tarihi</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tests"><strong>Tests</strong><a class="headerlink" href="#tests" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Alan</th>
+<th>Tür</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test_id</td>
+<td>UUID</td>
+<td>Test kimliği</td>
+</tr>
+<tr>
+<td>app_name</td>
+<td>VARCHAR(100)</td>
+<td>Uygulama adı</td>
+</tr>
+<tr>
+<td>developer_id</td>
+<td>UUID</td>
+<td>Geliştirici kimliği</td>
+</tr>
+<tr>
+<td>participants</td>
+<td>INT</td>
+<td>Katılımcı sayısı</td>
+</tr>
+<tr>
+<td>status</td>
+<td>ENUM(‘open’, ‘closed’)</td>
+<td>Test durumu</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>TIMESTAMP</td>
+<td>Başlangıç tarihi</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>TIMESTAMP</td>
+<td>Bitiş tarihi</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pointstransactions"><strong>PointsTransactions</strong><a class="headerlink" href="#pointstransactions" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Alan</th>
+<th>Tür</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>txn_id</td>
+<td>UUID</td>
+<td>İşlem kimliği</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>UUID</td>
+<td>Kullanıcı ID</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>INT</td>
+<td>Puan miktarı</td>
+</tr>
+<tr>
+<td>type</td>
+<td>ENUM('earn', 'spend')</td>
+<td>İşlem türü</td>
+</tr>
+<tr>
+<td>description</td>
+<td>VARCHAR(255)</td>
+<td>Açıklama</td>
+</tr>
+<tr>
+<td>txn_date</td>
+<td>TIMESTAMP</td>
+<td>İşlem tarihi</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-api-tasarm">6. ⚙️ API Tasarımı<a class="headerlink" href="#6-api-tasarm" title="Permanent link">&para;</a></h2>
+<h3 id="61-pointsservice-revize">6.1 PointsService (Revize)<a class="headerlink" href="#61-pointsservice-revize" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Metod</th>
+<th>Parametre</th>
+<th>Açıklama</th>
+<th>Örnek Yanıt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/points/add</code></td>
+<td>POST</td>
+<td>user_id, amount=10</td>
+<td>Kullanıcıya <strong>+10 puan</strong> kazandırır (ör. test katkısı)</td>
+<td><code>{ "success": true, "balance": 130 }</code></td>
+</tr>
+<tr>
+<td><code>/api/points/deduct</code></td>
+<td>POST</td>
+<td>user_id, amount=120</td>
+<td>Kullanıcının bakiyesinden <strong>120 puan</strong> düşer (ör. yeni test aktivasyonu)</td>
+<td><code>{ "success": true, "balance": 10 }</code></td>
+</tr>
+<tr>
+<td><code>/api/points/balance</code></td>
+<td>GET</td>
+<td>user_id</td>
+<td>Güncel puanı döner</td>
+<td><code>{ "balance": 10 }</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="62-sdkverifier">6.2 SDKVerifier<a class="headerlink" href="#62-sdkverifier" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Metod</th>
+<th>Parametre</th>
+<th>Açıklama</th>
+<th>Örnek Yanıt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/sdk/verify</code></td>
+<td>POST</td>
+<td>sdk_token, app_id</td>
+<td>Katılımcı doğrulama isteği</td>
+<td><code>{ "verified": true }</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="63-testorchestrator">6.3 TestOrchestrator<a class="headerlink" href="#63-testorchestrator" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Metod</th>
+<th>Parametre</th>
+<th>Açıklama</th>
+<th>Örnek Yanıt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/test/start</code></td>
+<td>POST</td>
+<td>developer_id, app_id</td>
+<td>Yeni test başlatır</td>
+<td><code>{ "test_id": "...", "status": "open" }</code></td>
+</tr>
+<tr>
+<td><code>/api/test/join</code></td>
+<td>POST</td>
+<td>test_id, user_id</td>
+<td>Katılımcı ekler</td>
+<td><code>{ "participants": 12, "status": "open" }</code></td>
+</tr>
+<tr>
+<td><code>/api/test/close</code></td>
+<td>POST</td>
+<td>test_id</td>
+<td>Testi kapatır</td>
+<td><code>{ "status": "closed" }</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-algoritma-taslaklar">7. 🧮 Algoritma Taslakları<a class="headerlink" href="#7-algoritma-taslaklar" title="Permanent link">&para;</a></h2>
+<h3 id="71-puan-guncelleme-debitcredit">7.1 Puan Güncelleme (Debit/Credit)<a class="headerlink" href="#71-puan-guncelleme-debitcredit" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_points</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;earn&quot;</span><span class="p">:</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">points</span> <span class="o">+=</span> <span class="n">amount</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;spend&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">points</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">:</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">points</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insufficient balance&quot;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">points_transactions</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">points</span>
+</code></pre></div>
+
+<hr />
+<h3 id="72-test-katlm-yonetimi">7.2 Test Katılım Yönetimi<a class="headerlink" href="#72-test-katlm-yonetimi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">join_test</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">participants</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Katılımcı limiti dolmuştur.&quot;</span><span class="p">}</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">participants</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">participants</span><span class="o">=</span><span class="n">test</span><span class="o">.</span><span class="n">participants</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">participants</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;closed&quot;</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;closed&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;participants&quot;</span><span class="p">:</span> <span class="n">test</span><span class="o">.</span><span class="n">participants</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">test</span><span class="o">.</span><span class="n">status</span><span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="8-guvenlik-ozeti">8. 🔒 Güvenlik Özeti<a class="headerlink" href="#8-guvenlik-ozeti" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Alan</th>
+<th>Uygulama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kimlik Doğrulama</strong></td>
+<td>JWT (Bearer Token)</td>
+</tr>
+<tr>
+<td><strong>Veri Şifreleme</strong></td>
+<td>TLS 1.3 (API), bcrypt (şifre)</td>
+</tr>
+<tr>
+<td><strong>Doğrulama Mantığı</strong></td>
+<td>SDK → API imza eşleşmesi</td>
+</tr>
+<tr>
+<td><strong>Hata Yönetimi</strong></td>
+<td>400: Bad Request, 401: Unauthorized, 409: Limit Error</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-tasarm-dogrulama-ve-eslestirme-tablosu">9. 🔍 Tasarım Doğrulama ve Eşleştirme Tablosu<a class="headerlink" href="#9-tasarm-dogrulama-ve-eslestirme-tablosu" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Test ID</th>
+<th>Gereksinim</th>
+<th>Doğrulama Yöntemi</th>
+<th>Eşleştirme Durumu</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UT-003</strong></td>
+<td>GR-005</td>
+<td>Birim Test</td>
+<td>✔</td>
+<td>Gereksinim → API (PointsService) → Test senaryosu bağlantısı tamam.</td>
+</tr>
+<tr>
+<td><strong>IT-003</strong></td>
+<td>GR-004</td>
+<td>Entegrasyon Test</td>
+<td>✔</td>
+<td>SDK doğrulama akışı API seviyesinde tanımlandı.</td>
+</tr>
+<tr>
+<td><strong>ST-002</strong></td>
+<td>GR-003</td>
+<td>Sistem Test</td>
+<td>✔</td>
+<td>Katılımcı limiti (12 kişi) tasarımda belirtildi ve sistem akışına işlendi.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Bu tablo, testlerin uygulanma aşamasından önceki <strong>tasarım-doğrulama eşleştirmesini</strong> gösterir.<br />
+Henüz testler çalıştırılmamıştır, ancak gereksinimler ve tasarım arasında tam izlenebilirlik sağlanmıştır.  </p>
+</blockquote>
+<hr />
+<h2 id="10-onay">10. 🧾 Onay<a class="headerlink" href="#10-onay" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Ad</th>
+<th>Tarih</th>
+<th>İmza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tasarımcı</td>
+<td>İsmail ARICIOĞLU</td>
+<td>07-10-2025</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gözden Geçiren</td>
+<td>ChatGPT (Yapay Asistan)</td>
+<td>07-10-2025</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Onaylayan</td>
+<td>BilKavTopluluğu</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Kopyaland\u0131", "clipboard.copy": "Kopyala", "search.result.more.one": "Bu sayfada 1 tane daha", "search.result.more.other": "Bu sayfada # tane daha", "search.result.none": "E\u015fle\u015fen dok\u00fcman bulunamad\u0131", "search.result.one": "1 dok\u00fcman bulundu", "search.result.other": "# dok\u00fcman bulundu", "search.result.placeholder": "Aramaya ba\u015flamak i\u00e7in yaz\u0131n", "search.result.term.missing": "Eksik", "select.version": "Versiyon se\u00e7"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
