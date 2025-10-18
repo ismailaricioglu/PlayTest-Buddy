@@ -16,24 +16,24 @@ theme:
 nav:
   - Anasayfa: index.md
   - Gereksinimler:
-      - İş Gereksinimi: docs/System_Requirements.md
-      - Sistem Gereksinimi: docs/System_Requirements.md
+      - İş Gereksinimi: System_Requirements.md
+      - Sistem Gereksinimi: System_Requirements.md
   - Tasarım:
-      - Fonksiyonel Tasarım: docs/Functional_Design.md
-      - Alt Sistem Tasarımı: docs/SubSystem_Design.md
-      - Detay Tasarım: docs/Detailed_Design.md
+      - Fonksiyonel Tasarım: Functional_Design.md
+      - Alt Sistem Tasarımı: SubSystem_Design.md
+      - Detay Tasarım: Detailed_Design.md
   - Test Dokümantasyonu:
-      - Test Tasarımı ve RTM: docs/Test_Design_RTM.md
-      - Kabul Test Planı: docs/Acceptance_Test_Plan.md
-      - Kabul Test Raporu: docs/Acceptance_Test_Report.md
+      - Test Tasarımı ve RTM: Test_Design_RTM.md
+      - Kabul Test Planı: Acceptance_Test_Plan.md
+      - Kabul Test Raporu: Acceptance_Test_Report.md
   - Rehberler:
-      - Geliştirici Rehberi: docs/guides/Developer_Guide_PlayTestBuddy.md
-      - Kullanıcı Rehberi: docs/guides/User_Guide_PlayTestBuddy.md
-      - Yönetici Rehberi: docs/guides/Admin_Guide_PlayTestBuddy.md
+      - Geliştirici Rehberi: guides/Developer_Guide_PlayTestBuddy.md
+      - Kullanıcı Rehberi: guides/User_Guide_PlayTestBuddy.md
+      - Yönetici Rehberi: guides/Admin_Guide_PlayTestBuddy.md
   - Topluluk:
-      - Katkı Rehberi: CONTRIBUTING.md
-      - Topluluk Rehberi: docs/guides/Community_Guide_PlayTestBuddy.md
-      - Lisans: LICENSE
+      - Katkı Rehberi: ../CONTRIBUTING.md
+      - Topluluk Rehberi: guides/Community_Guide_PlayTestBuddy.md
+      - Lisans: ../LICENSE
 
 markdown_extensions:
   - toc:
