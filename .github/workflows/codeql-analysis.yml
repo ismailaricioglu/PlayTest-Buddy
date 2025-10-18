@@ -31,8 +31,9 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
+    # Otomatik derleme yerine güvenli bir placeholder adımı eklendi
+    - name: Skip autobuild (no build required)
+      run: echo "Skipping autobuild step — documentation and lightweight code only"
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
