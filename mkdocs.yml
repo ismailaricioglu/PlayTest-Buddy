@@ -2,7 +2,7 @@ site_name: PlayTest Buddy Documentation
 site_description: Mobil uygulama test süreçlerini kolaylaştıran topluluk destekli platform.
 site_url: https://ismailaricioglu.github.io/PlayTest-Buddy/
 repo_url: https://github.com/ismailaricioglu/PlayTest-Buddy
-repo_name: PlayTestBuddy
+repo_name: PlayTest-Buddy
 
 theme:
   name: material
